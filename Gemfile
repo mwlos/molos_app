@@ -20,6 +20,7 @@ gem 'bcrypt-ruby', '3.1.2'
 group :test do
 	gem 'selenium-webdriver'
 	gem 'capybara'
+	gem 'factory_girl_rails','4.2.1'
 end
 
 # Use SCSS for stylesheets
