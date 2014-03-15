@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create 
     @user = User.new(user_params) #this creates a new user object with the data you entered before.
     if @user.save #if the data is valid, save it
+      sign_in @user
       flash[:success]="Welcome to the Molos App!"
       redirect_to @user #and go to the @user show action
     else
