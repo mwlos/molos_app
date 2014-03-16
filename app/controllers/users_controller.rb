@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   
 
   def create 
-    @user = User.new(params[:user]) #this creates a new user object with the data you entered before.
+    @user = User.new(user_params) #this creates a new user object with the data you entered before.
     if @user.save #if the data is valid, save it
       sign_in @user
       flash[:success]="Welcome to the Molos App!"
@@ -54,10 +55,6 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:name,:email,:password,:password_confirmation)
-  end
-
-  def signed_in_user
-      redirect_to signin_url, notice: "Pleaseeeee appear." unless signed_in?
   end
   
   def correct_user
